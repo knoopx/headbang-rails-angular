@@ -1,0 +1,17 @@
+.release
+  display: inline-block
+  position: relative
+  overflow: hidden
+  border-radius: $border-radius-large
+
+  .release-controls
+    overflow: hidden
+    transition: 100ms ease-out all
+    position: absolute
+    bottom: 0
+    opacity: 0
+    background-color: darken($navbar-default-bg, 5%)
+
+  &:hover
+    .release-controls
+      opacity: 1

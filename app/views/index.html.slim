@@ -1,0 +1,65 @@
+doctype html
+html ng-app="headbang"
+  head
+    meta charset="utf-8"
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"
+    = javascript_include_tag :application
+    = stylesheet_link_tag :application
+
+  body.flex-cols ng-controller="appCtrl"
+    audio media-player="player" playlist="localStorage.playlist"
+    .sidebar-container ng-class="{left: openLeftSidebar, right: openRightSidebar}"
+      .sidebar-panel.sidebar-panel-left.section.flex-rows ng-swipe-left="openLeftSidebar = false"
+        .section-header.section-primary
+          .input-group
+            input.flex-1.form-control type="search" ng-model="filter" debounce="500"
+            .input-group-btn
+              .btn.btn-default ng-show="!filter.length"
+                i.fa.fa-search
+
+              .btn.btn-default ng-click="filter = ''" ng-show="filter.length"
+                i.fa.fa-times
+
+        .section-body.flex-1 spinner="spinner.navigation"
+          .wrapper-1 ng-controller="mainNavigationCtrl" ng-include="'templates/navigation.html'"
+
+        .section-footer.section-primary
+          .btn-group.pull-right
+            a.btn.btn-default ng-click="scanSources()"
+              i.fa.fa-refresh
+
+            a.btn.btn-default href="#/settings"
+              i.fa.fa-cog
+
+      .sidebar-content.section.flex-1.flex-rows ng-swipe-right="openLeftSidebar = true; openRightSidebar = false" ng-swipe-left="openRightSidebar = true; openLeftSidebar = false"
+        .section-body.flex-1 spinner="spinner.ngView"
+          ng-view
+
+      .sidebar-panel.sidebar-panel-right.section.flex-rows ng-swipe-right="openRightSidebar = false"
+        .section-header.section-primary
+          select.form-control
+
+        .section-body.flex-1 ng-include="'templates/playlist.html'"
+        .section-footer.section-primary ng-include="'templates/player.html'" ng-if="player.currentTrack" ng-controller="playerCtrl"
+        .section-footer.section-primary.clearfix
+          .btn-toolbar.pull-right
+            .btn-group
+              a.btn.btn-default ng-click="shufflePlaylist()"
+                i.fa.fa-random
+            .btn-group.pull-right
+              a.btn.btn-default ng-click="localStorage.playlist.length = 0"
+                i.fa.fa-trash-o
+
+          .btn-group
+            a.btn.btn-default ng-click="player.prev()"
+              i.fa.fa-backward
+
+            a.btn.btn-default ng-show="player.playing" ng-click="player.pause()"
+              i.fa.fa-pause
+
+            a.btn.btn-default ng-show="!player.playing" ng-click="player.play()"
+              i.fa.fa-play
+
+            a.btn.btn-default ng-click="player.next()"
+              i.fa.fa-forward

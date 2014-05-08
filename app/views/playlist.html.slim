@@ -1,0 +1,6 @@
+ul.playlist ng-controller="playlistCtrl"
+  li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in localStorage.playlist" ng-class="{active: $index == player.currentTrack - 1}"
+    span.pull-right.text-muted ng-bind="track.length | time"
+    span ng-bind="track.title"
+    '
+    span.text-muted ng-bind="track.artist_name"

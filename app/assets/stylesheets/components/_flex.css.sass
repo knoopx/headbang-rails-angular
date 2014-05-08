@@ -1,0 +1,14 @@
+.flex-cols, .flex-rows
+  display: flex
+  width: 100%
+  height: 100%
+
+.flex-rows
+  flex-direction: column
+
+.flex-cols
+  flex-direction: row
+
+@for $i from 1 through 12
+  .flex-#{$i}
+    flex: $i

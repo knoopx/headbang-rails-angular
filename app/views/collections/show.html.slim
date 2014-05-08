@@ -1,0 +1,13 @@
+.section.flex-rows
+  .section-header.section-primary
+    .btn-group.pull-right
+      a.btn.btn-primary ng-click="playCollection(collection)"
+        i.fa.fa-play
+      a.btn.btn-default ng-click="enqueueCollection(collection)"
+        i.fa.fa-plus
+
+    .section-title ng-dblclick="rename()"
+      | {{collection.name}}
+
+  .section-body.flex-1.wrapper-1
+    release-grid releases="collection.releases" play="playRelease(release)" enqueue="enqueueRelease(release)" delete="removeRelease(release)" click-artist="showArtist(artist)"

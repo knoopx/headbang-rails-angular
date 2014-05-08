@@ -1,0 +1,43 @@
+.grid
+  +make-row(12px)
+  margin-top: -6px
+  margin-bottom: -6px
+
+  &.grid-sm
+    .grid-item
+      display: inline-block
+      width: 120px
+      margin: 3px 6px
+
+  &.grid-fluid
+    .grid-item
+      +make-xs-column(6, 12px)
+      +make-sm-column(4, 12px)
+      +make-md-column(3, 12px)
+      +make-lg-column(2, 12px)
+      margin-top: 6px
+      margin-bottom: 6px
+
+  .grid-item
+    border-radius: $border-radius-large
+    overflow: hidden
+
+    +ng-enter-fade-in
+
+    .grid-item-image
+      display: block
+      border-top-left-radius: $border-radius-large
+      border-top-right-radius: $border-radius-large
+      width: 100%
+      padding-bottom: 100%
+      background-size: cover
+      background-repeat: no-repeat
+      background-position: center
+      background-color: darken($navbar-default-bg, 2%)
+      position: relative
+
+    .grid-item-body
+      border-bottom-left-radius: $border-radius-large
+      border-bottom-right-radius: $border-radius-large
+      background-color: $navbar-default-bg
+      padding: 10px

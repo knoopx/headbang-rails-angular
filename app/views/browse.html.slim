@@ -1,0 +1,13 @@
+.modal-header
+  h3.modal-title Browse
+  | {{path}}
+
+.list-group.trail-0 style="max-height:400px;overflow:auto"
+  a.list-group-item ng-repeat="item in items | orderBy:'name'" ng-click="browse(item.path)"
+    i.fa.fa-folder
+    | &nbsp;
+    | {{item.name}}
+
+.modal-footer
+  button.btn.btn-primary ng-click="ok()" Select
+  button.btn.btn-default ng-click="cancel()" Cancel

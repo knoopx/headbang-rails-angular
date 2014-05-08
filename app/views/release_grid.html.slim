@@ -1,0 +1,24 @@
+.grid.grid-fluid
+  .grid-item.release draggable="headbang/release" draggable-data="release.id" ng-repeat="release in releases track by release.id"
+    .grid-item-image ng-click="click(release)" ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+      .release-controls
+        .wrapper-1
+          .btn-group.btn-group-justified
+            a.btn.btn-link ng-click="play($event, release)"
+              i.fa.fa-play
+            a.btn.btn-link ng-click="enqueue($event, release)"
+              i.fa.fa-plus
+
+    .grid-item-body.ellipsis
+      .flex-cols
+        a.flex-1.ellipsis ng-click="click(release)"
+          strong
+            | {{release.title}}
+        .text-muted ng-if="release.year"
+          | {{release.year}}
+
+      .pull-right ng-if="onDelete"
+        a.text-muted ng-click="delete(release)"
+          i.fa.fa-times
+
+      a ng-bind="release.artist.name" ng-click="clickArtist(release.artist)"

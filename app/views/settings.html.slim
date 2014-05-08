@@ -1,0 +1,21 @@
+.section
+  .section-header.section-primary
+    .section-title Settings
+
+  .section-body.wrapper-2.flex-1
+    .sources ng-controller="sourcesCtrl"
+      h3.lead-0
+        ' Sources
+        small.pull-right
+          a.btn.btn-primary.btn-xs ng-click="addSource()"
+            i.fa.fa-plus
+
+      .list-group ng-if="sources.length"
+        .list-group-item ng-repeat="source in sources track by source.id"
+          .pull-right
+            a ng-click="removeSource(source)"
+              i.fa.fa-times
+          | {{source.path}}
+
+      i.text-muted ng-if="!sources.length"
+        | No sources yet

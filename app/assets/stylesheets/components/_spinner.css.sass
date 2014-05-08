@@ -1,0 +1,36 @@
+$color: rgba(white, .5)
+$thickness: 10px
+$size: 50px
+$speed: 750ms
+
++keyframes(rotate-forever)
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.spinner
+  position: relative
+  height: 100%
+  width: 100%
+
+  &:after
+    content: ""
+    position: absolute
+    top: 50%
+    left: 50%
+    width: $size
+    height: $size
+    margin-left: -$size/2
+    margin-top: -$size/2
+
+    +animation-duration($speed)
+    +animation-iteration-count(infinite)
+    +animation-name(rotate-forever)
+    +animation-timing-function(linear)
+
+    border: $thickness solid $color
+    border-right-color: transparent
+    border-radius: 50%
+
+    display: inline-block

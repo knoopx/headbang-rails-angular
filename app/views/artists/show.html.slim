@@ -1,0 +1,64 @@
+.section.flex-rows
+  .section-header.section-primary
+    .btn-toolbar.pull-right
+      .btn-group
+        a.btn.btn-primary ng-click="playArtist(artist)"
+          i.fa.fa-play
+        a.btn.btn-default ng-click="enqueueArtist(artist)"
+          i.fa.fa-plus
+      .btn-group.hidden-xs
+        a.btn.btn-default ng-click="fetchArtist(artist)"
+          i.fa.fa-refresh
+
+    .section-title ng-dblclick="rename()"
+      | {{artist.name}}
+
+  .section-body.flex-1.wrapper-2
+    .row.trail-4
+      .col-lg-3.col-sm-4.hidden-md.hidden-xs.trail-2
+        img.img-responsive.img-rounded width="252" ng-src="{{artist.image_url}}"
+
+      .col-lg-9.row
+        .col-lg-12.col-md-12.col-sm-6.trail-2 ng-bind-html="artist.biography | rawHtml"
+        .col-lg-12.col-sm-12 ng-controller="similarArtistsCtrl" ng-if="artist"
+          .grid.grid-sm
+            .grid-item ng-repeat="artist in similarArtists track by artist.id"
+              .grid-item-image ng-click="showArtist(artist)" ng-style="{'background-image': 'url(' + (artist.image_url || '#{image_url("drumkit.svg")}') + ')'}"
+              .grid-item-body.ellipsis
+                a ng-click="showArtist(artist)" ng-bind="artist.name"
+
+    .release-group.trail-4 ng-repeat="(group, releases) in artist.releases | groupBy: 'title'" ng-controller="releaseGroupCtrl"
+      .release-group-release ng-repeat="release in releases | orderBy:'-year'" ng-show="showDuplicates || $first"
+        h3.trail-0
+          small.text-muted.pull-right.hidden-sm.hidden-xs ng-bind="release.name"
+          ' {{release.title}}
+
+        h5.lead-0.trail-2
+          small.text-muted.pull-right.hidden-sm.hidden-xs ng-bind="release.path"
+          ' {{release.year}}
+
+        .row
+          .col-lg-3.col-sm-3.trail-2
+            .release
+              img.img-responsive.img-rounded ng-src="{{release.artwork_url || '#{image_url("cd.svg")}'}}" width="250" draggable="headbang/release" draggable-data="release.id"
+              .release-controls
+                .wrapper-1
+                  .btn-group.btn-group-justified
+                    a.btn.btn-link ng-click="playRelease(release)"
+                      i.fa.fa-play
+                    a.btn.btn-link ng-click="enqueueRelease(release)"
+                      i.fa.fa-plus
+
+          .col-lg-9.col-sm-9
+            table.table.table-striped.table-condensed
+              tbody
+                tr ng-repeat="track in release.tracks | orderBy:'number'"
+                  td.text-right ng-bind="track.number"
+                  td ng-bind="track.title"
+                  td ng-bind="track.length | time"
+                  td.hidden-xs
+                    .label.label-default
+                      | {{track.bitrate}} kbps
+
+      a.btn.btn-block.btn-default.lead-2 ng-click="showDuplicates = true" ng-show="!showDuplicates && releases.length > 1"
+        | Show {{releases.length - 1}} hidden duplicate(s)

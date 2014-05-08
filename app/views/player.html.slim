@@ -1,0 +1,22 @@
+.flex-cols
+  .after-1 ng-if="track.release.artwork_url"
+    img.img-rounded width="86" ng-src="{{track.release.artwork_url}}"
+
+  .flex-1
+    .pull-right
+      .label.label-default
+        | {{track.bitrate}} kbps
+    .ellipsis
+      strong ng-bind="track.title"
+
+    .ellipsis
+      span ng-bind="track.artist_name"
+    '
+    .ellipsis
+      small.pull-right.text-muted ng-bind="track.release.year"
+      small.text-muted ng-bind="track.release_title"
+
+    .clearfix
+      input type="range" min="0" max="{{player.duration}}" ng-model="player.currentTime" onchange="angular.element(this).scope().seek(this.value)"
+      small.pull-right ng-bind="player.formatDuration"
+      small.pull-left ng-bind="player.formatTime"

@@ -1,0 +1,26 @@
+=ng-enter-fade-in($duration: 100ms, $stager: 10ms)
+  &.ng-enter, &.ng-leave
+    transition: $duration ease-in all
+
+  &.ng-enter
+    opacity: 0
+
+  &.ng-enter-active, &.ng-leave
+    opacity: 1
+
+  &.ng-leave-active
+    opacity: 0
+
+  &.ng-enter-stagger
+    transition-delay: $stager
+    transition-duration: 0
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content

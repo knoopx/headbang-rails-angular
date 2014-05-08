@@ -1,0 +1,26 @@
+$section-primary-bg: darken($body-bg, 5%)
+$section-border: darken($section-primary-bg, 5%)
+
+.section
+  &:not(:last-child)
+    border-right: 1px solid $section-border
+
+  .section-title
+    line-height: 34px
+    font-size: 22px
+
+  .section-body
+    overflow-y: auto
+    overflow-x: hidden
+
+  .section-header, .section-footer
+    padding: 12px
+
+  .section-header
+    border-bottom: 1px solid $section-border
+
+  .section-footer
+    border-top: 1px solid $section-border
+
+  .section-primary
+    background-color: $section-primary-bg

@@ -1,0 +1,33 @@
+$horizontal-rythm: 12px
+$vertical-rythm: 12px
+
+=wrapper($i)
+  padding: $horizontal-rythm * $i $vertical-rythm * $i
+
+=leader($i)
+  margin-top: $vertical-rythm * $i !important
+
+=trailer($i)
+  margin-bottom: $vertical-rythm * $i !important
+
+=before($i)
+  margin-left: $horizontal-rythm * $i !important
+
+=after($i)
+  margin-right: $horizontal-rythm * $i !important
+
+@for $i from 0 through 6
+  .wrapper-#{$i}
+    +wrapper($i)
+
+  .before-#{$i}
+    +before($i)
+
+  .after-#{$i}
+    +after($i)
+
+  .lead-#{$i}
+    +leader($i)
+
+  .trail-#{$i}
+    +trailer($i)
