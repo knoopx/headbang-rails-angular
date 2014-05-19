@@ -1,0 +1,28 @@
+.section
+  display: flex
+  flex-direction: column
+
+  &:not(:last-child)
+    border-right: 1px solid $navbar-default-border
+
+  .section-title
+    margin: 0
+
+  .section-header
+    border-bottom: 1px solid $navbar-default-border
+
+  .section-body
+    flex: 1
+    overflow-y: auto
+    overflow-x: hidden
+    background-color: $navbar-default-bg
+
+    &.section-body-primary
+      background-color: darken($navbar-default-bg, 2%)
+
+  .section-footer
+    border-top: 1px solid $navbar-default-border
+
+  .section-header, .section-footer
+    padding: 12px
+    background-color: $navbar-default-bg

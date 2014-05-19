@@ -1,0 +1,25 @@
+.wrapper-2
+  .media.trail-2
+    .pull-left.after-2
+      img.media-object.img-rounded ng-src="{{release.artwork_url || '#{image_url("cd.svg")}'}}" width="250"
+
+    .media-body
+      h2.trail-0.lead-0
+        ' {{release.title}}
+        small
+          | {{release.year}}
+
+      h4.text-muted.lead-0.trail-2
+        | {{release.name}}
+
+      table.table.table-striped.table-condensed
+        tbody
+          tr ng-repeat="track in release.tracks"
+            td.text-right ng-bind="track.number"
+            td ng-bind="track.title"
+            td ng-bind="track.length | time"
+            td
+              .label.label-default
+                | {{track.bitrate}} kbps
+
+.dupe ng-repeat="release in release.releases track by release.id" ng-include="'templates/releases/show'"

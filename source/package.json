@@ -1,0 +1,14 @@
+{
+  "name": "Headbang",
+  "main": "index.html",
+  "nodejs": false,
+  "window": {
+    "title": "Headbang",
+    "icon": "images/icon.png",
+    "toolbar": false,
+    "width": 1200,
+    "height": 600,
+    "min_width": 800,
+    "min_height": 600
+  }
+}

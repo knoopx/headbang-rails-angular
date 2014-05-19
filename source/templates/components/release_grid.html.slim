@@ -1,0 +1,20 @@
+.grid
+  .grid-item draggable="headbang/release" draggable-data="release.id" ng-repeat="release in releases track by release.id"
+    .grid-item-image ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+      .release-controls
+        .wrapper-1
+          .btn-group.btn-group-justified
+            a.btn.btn-default ng-click="playRelease(release, true)"
+              i.fa.fa-play
+            a.btn.btn-default ng-click="playRelease(release)"
+              i.fa.fa-plus
+
+    .grid-item-body.ellipsis
+      .flex-cols
+        a.flex-1.ellipsis ng-href="#/releases/{{release.id}}"
+          strong
+            | {{release.title}}
+        .text-muted ng-if="release.year"
+          | {{release.year}}
+
+      a ng-bind="release.artist.name" href="#/artists/{{release.artist.id}}"

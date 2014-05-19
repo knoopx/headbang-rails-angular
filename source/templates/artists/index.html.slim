@@ -1,0 +1,6 @@
+.wrapper-1
+  .grid
+    .grid-item ng-repeat="artist in artists track by artist.id"
+       .grid-item-image ng-style="{'background-image': 'url(' + (artist.artwork_url || '#{image_url("drumkit.svg")}') + ')'}"
+       .grid-item-body.ellipsis
+         a href="#/artists/{{artist.id}}" ng-bind="artist.name"

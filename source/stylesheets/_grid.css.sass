@@ -1,0 +1,52 @@
+.grid
+  margin: -6px
+  margin-bottom: -6px
+
+.grid-item
+  margin-top: 6px
+  margin-bottom: 6px
+  overflow: hidden
+  margin: 6px
+
+  &.ng-enter, &.ng-leave
+    transition: 100ms ease-in all
+
+  &.ng-enter, &.ng-leave-active
+    opacity: 0
+
+  &.ng-enter-active, &.ng-leave
+    opacity: 1
+
+  &.ng-enter-stagger
+    transition-delay: 10ms
+    transition-duration: 0
+
+  .grid-item-image
+    display: block
+    border-top-left-radius: $border-radius-large
+    border-top-right-radius: $border-radius-large
+    width: 100%
+    padding-bottom: 100%
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    background-color: darken($navbar-default-bg, 2%)
+    position: relative
+
+    .release-controls
+      overflow: hidden
+      transition: 100ms ease-out all
+      position: absolute
+      bottom: 0
+      background-color: darken($navbar-default-bg, 5%)
+      max-height: 0
+
+    &:hover
+      .release-controls
+        max-height: 100%
+
+  .grid-item-body
+    border-bottom-left-radius: $border-radius-large
+    border-bottom-right-radius: $border-radius-large
+    background-color: $navbar-default-bg
+    padding: 10px

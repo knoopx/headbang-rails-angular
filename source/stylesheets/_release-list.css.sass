@@ -1,0 +1,38 @@
+.release-list
+  .release
+    &:not(:last-child)
+      border-bottom: 1px solid #eee
+
+    &.active
+      background-color: rgba(black, 0.03)
+
+    .release-row
+      +clearfix
+      list-style: none
+      margin-bottom: 0
+      padding: 10px
+
+      &:hover
+        background-color: rgba(black, 0.02)
+
+      li
+        display: inline-block
+        float: left
+        vertical-align: middle
+        white-space: nowrap
+        text-overflow: ellipsis
+        margin-right: 10px
+
+        &.action
+          width: 40px
+          line-height: 40px
+          text-align: center
+          color: $text-muted
+
+        &.release-artwork
+          img
+            margin: 0 10px
+            max-width: 40px
+
+    .release-tracks
+      padding: 0 10px

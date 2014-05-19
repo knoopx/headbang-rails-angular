@@ -1,0 +1,31 @@
+.playlist
+  padding-left: 0
+  list-style: none
+
+  .playlist-item
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+    padding: 4px 8px
+
+    &:nth-child(2)
+      background-color: rgba(white, .025)
+
+    &:hover
+      background-color: rgba(white, 0.1)
+
+    &:not(:last-child)
+      border-bottom: 1px solid rgba(black, 0.1)
+
+    .playlist-item-artist
+      color: $text-muted
+
+    &.active
+      background-color: $list-group-active-bg
+      color: $list-group-active-color
+
+      .playlist-item-artist
+        color: $list-group-active-color
+
+      .playlist-item-title
+        font-weight: bold
