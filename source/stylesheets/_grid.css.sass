@@ -1,12 +1,16 @@
 .grid
-  margin: -6px
+  +make-row(12px)
+  margin-top: -6px
   margin-bottom: -6px
 
 .grid-item
+  +make-xs-column(6, 12px)
+  +make-sm-column(4, 12px)
+  +make-md-column(3, 12px)
+
   margin-top: 6px
   margin-bottom: 6px
   overflow: hidden
-  margin: 6px
 
   &.ng-enter, &.ng-leave
     transition: 100ms ease-in all
