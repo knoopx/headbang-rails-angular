@@ -1,113 +1,123 @@
-audio preload="none" media-player="player" data-playlist="$storage.playlist"
+doctype html
+html ng-app="headbang"
+  head
+    meta charset="utf-8"
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"
+    = javascript_include_tag "application"
+    = stylesheet_link_tag "application"
 
-.section resizable="vertical" resizable-min="300" resizable-max="600"
-  .section-header
-    .input-group
-      input.flex-1.form-control type="search" ng-model="filter" debounce="500"
-      .input-group-btn
-        .btn.btn-default ng-show="!filter.length"
-          i.fa.fa-search
+  body ng-controller="appCtrl"
+    audio preload="none" media-player="player" data-playlist="$storage.playlist"
 
-        .btn.btn-default ng-click="filter = ''" ng-show="filter.length"
-          i.fa.fa-times
+    .section resizable="vertical" resizable-min="300" resizable-max="600"
+      .section-header
+        .input-group
+          input.flex-1.form-control type="search" ng-model="filter" debounce="500"
+          .input-group-btn
+            .btn.btn-default ng-show="!filter.length"
+              i.fa.fa-search
 
-  .section-body ng-controller="mainNavigationCtrl"
-    .wrapper-1
-      .collections ng-controller="collectionsNavigationItemCtrl"
-        h4 Collections
-        .list-group
-          a.list-group-item href="#/" ng-class="{active: $route.current.name == 'library'}"
+            .btn.btn-default ng-click="filter = ''" ng-show="filter.length"
+              i.fa.fa-times
+
+      .section-body ng-controller="mainNavigationCtrl"
+        .wrapper-1
+          .collections ng-controller="collectionsNavigationItemCtrl"
+            h4 Collections
+            .list-group
+              a.list-group-item href="#/" ng-class="{active: $route.current.name == 'library'}"
+                .pull-right
+                  i.fa.fa-home
+                | Library
+
+              a.list-group-item href="#/collections/{{collection.id}}" ng-repeat="collection in collections track by collection.id" ng-controller="collectionItemCtrl" droppable="headbang/release" droppable-drop="drop($data)" ng-class="{active: $route.current.name == 'collection' && $route.current.params.id == collection.id }"
+                .pull-right
+                  .btn.btn-xs ng-click="removeCollection(collection)"
+                    i.fa.fa-times
+                | {{collection.name}}
+
+              .list-group-item ng-if="!filter"
+                input.form-control-muted type="text" placeholder="New collection..." ng-model="newCollection.name" ui-keypress="{'enter': 'createCollection($event)'}"
+
+          h4
+            a href="#/artists"
+              small.pull-right
+                .fa.fa-cog
+              | Artists
+
+          .list-group ng-if="artists.length"
+            a.list-group-item href="#/artists/{{artist.id}}" ng-repeat="artist in artists track by artist.id" ng-class="{active: $route.current.name == 'artist' && $route.current.params.id == artist.id }"
+              span.badge
+                | {{artist.releases_count}}
+              | {{artist.name}}
+
+          i.text-muted ng-if="!artists.length" No results
+
+          h4 Genres
+          .list-group ng-if="genres.length"
+            a.list-group-item ng-repeat="genre in genres track by genre.id" ng-bind="genre.name"
+
+          i.text-muted ng-if="!genres.length" No results
+
+          h4 Labels
+          .list-group ng-if="labels.length"
+            a.list-group-item ng-repeat="label in labels" href="#/labels/{{label.id}}"
+              span.badge
+                | {{label.releases_count}}
+              | {{label.name}}
+          i.text-muted ng-if="!labels.length" No results
+
+    .section.flex-1
+      .section-body.section-body-primary ng-view="" scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
+
+    .section ng-if="player.currentTrack || playlist.length" resizable="vertical" resizable-min="400" resizable-max="600"
+      .section-body
+        ul.playlist ng-controller="playlistCtrl"
+          li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in $storage.playlist" ng-class="{ active: player.playing && player.currentTrack === $index + 1}"
+            span.playlist-item-title ng-bind="track.title"
+            '
+            span.playlist-item-artist ng-bind="track.artist_name"
+
+      .section-footer ng-if="player.currentTrack" ng-controller="playerCtrl"
+        .flex-cols
+          .after-1
+            .artwork style="width:86px" ng-style="{'background-image': 'url(' + (track.release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+
+          .flex-1
             .pull-right
-              i.fa.fa-home
-            | Library
+              .label.label-default
+                | {{track.bitrate}} kbps
+            .ellipsis
+              strong ng-bind="track.title"
 
-          a.list-group-item href="#/collections/{{collection.id}}" ng-repeat="collection in collections track by collection.id" ng-controller="collectionItemCtrl" droppable="headbang/release" droppable-drop="drop($data)" ng-class="{active: $route.current.name == 'collection' && $route.current.params.id == collection.id }"
+            .ellipsis
+              span ng-bind="track.release.title"
+            '
             .pull-right
-              .btn.btn-xs ng-click="removeCollection(collection)"
-                i.fa.fa-times
-            | {{collection.name}}
+              .text-muted ng-bind="track.release.year"
+            .ellipsis
+              span ng-bind="track.artist_name"
 
-          .list-group-item ng-if="!filter"
-            input.form-control-muted type="text" placeholder="New collection..." ng-model="newCollection.name" ui-keypress="{'enter': 'createCollection($event)'}"
+            .clearfix
+              input type="range" min="0" max="{{player.duration}}" ng-model="player.currentTime" onchange="angular.element(this).scope().seek(this.value)" ng-disabled="{{player.seekable}}"
+              small.pull-right ng-bind="player.formatDuration"
+              small.pull-left ng-bind="player.formatTime"
 
-      h4
-        a href="#/artists"
-          small.pull-right
-            .fa.fa-cog
-          | Artists
+      .section-footer.clearfix
+        .btn-group.pull-right
+          button.btn.btn-default ng-click="$storage.playlist.length = 0"
+            i.fa.fa-trash-o
 
-      .list-group ng-if="artists.length"
-        a.list-group-item href="#/artists/{{artist.id}}" ng-repeat="artist in artists track by artist.id" ng-class="{active: $route.current.name == 'artist' && $route.current.params.id == artist.id }"
-          span.badge
-            | {{artist.releases_count}}
-          | {{artist.name}}
+        .btn-group
+          button.btn.btn-default ng-click="player.prev(true)"
+            i.fa.fa-backward
 
-      i.text-muted ng-if="!artists.length" No results
+          button.btn.btn-default ng-show="player.playing" ng-click="player.pause()"
+            i.fa.fa-pause
 
-      h4 Genres
-      .list-group ng-if="genres.length"
-        a.list-group-item ng-repeat="genre in genres track by genre.id" ng-bind="genre.name"
+          button.btn.btn-default ng-show="!player.playing" ng-click="player.play()"
+            i.fa.fa-play
 
-      i.text-muted ng-if="!genres.length" No results
-
-      h4 Labels
-      .list-group ng-if="labels.length"
-        a.list-group-item ng-repeat="label in labels" href="#/labels/{{label.id}}"
-          span.badge
-            | {{label.releases_count}}
-          | {{label.name}}
-      i.text-muted ng-if="!labels.length" No results
-
-.section.flex-1
-  .section-body.section-body-primary ng-view="" scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
-
-.section ng-if="player.currentTrack || playlist.length" resizable="vertical" resizable-min="400" resizable-max="600"
-  .section-body
-    ul.playlist ng-controller="playlistCtrl"
-      li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in $storage.playlist" ng-class="{ active: player.playing && player.currentTrack === $index + 1}"
-        span.playlist-item-title ng-bind="track.title"
-        '
-        span.playlist-item-artist ng-bind="track.artist_name"
-
-  .section-footer ng-if="player.currentTrack" ng-controller="playerCtrl"
-    .flex-cols
-      .after-1
-        .artwork style="width:86px" ng-style="{'background-image': 'url(' + (track.release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
-
-      .flex-1
-        .pull-right
-          .label.label-default
-            | {{track.bitrate}} kbps
-        .ellipsis
-          strong ng-bind="track.title"
-
-        .ellipsis
-          span ng-bind="track.release.title"
-        '
-        .pull-right
-          .text-muted ng-bind="track.release.year"
-        .ellipsis
-          span ng-bind="track.artist_name"
-
-        .clearfix
-          input type="range" min="0" max="{{player.duration}}" ng-model="player.currentTime" onchange="angular.element(this).scope().seek(this.value)" ng-disabled="{{player.seekable}}"
-          small.pull-right ng-bind="player.formatDuration"
-          small.pull-left ng-bind="player.formatTime"
-
-  .section-footer.clearfix
-    .btn-group.pull-right
-      button.btn.btn-default ng-click="$storage.playlist.length = 0"
-        i.fa.fa-trash-o
-
-    .btn-group
-      button.btn.btn-default ng-click="player.prev(true)"
-        i.fa.fa-backward
-
-      button.btn.btn-default ng-show="player.playing" ng-click="player.pause()"
-        i.fa.fa-pause
-
-      button.btn.btn-default ng-show="!player.playing" ng-click="player.play()"
-        i.fa.fa-play
-
-      button.btn.btn-default ng-click="player.next(true)"
-        i.fa.fa-forward
+          button.btn.btn-default ng-click="player.next(true)"
+            i.fa.fa-forward

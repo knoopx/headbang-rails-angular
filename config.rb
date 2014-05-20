@@ -2,8 +2,6 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
-page "/templates/*", layout: false
-
 configure :build do
   set :http_prefix, "app://headbang"
 end
