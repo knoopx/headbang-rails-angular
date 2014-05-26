@@ -134,3 +134,28 @@ input[type='range']::-webkit-slider-thumb
   border-radius: 5px
   box-shadow: 0 0 5px rgba(black, .25)
   background-color: $color-red
+
+.stretch
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  overflow: auto
+
+.ui-splitbar
+  display: block
+  background-color: $navbar-default-border
+  right: auto
+  position: absolute
+  z-index: 99999
+
+.ui-layout-row > .ui-splitbar
+  height: 1px
+  width: 100%
+  cursor: row-resize
+
+.ui-layout-column > .ui-splitbar
+  width: 1px
+  height: 100%
+  cursor: col-resize
