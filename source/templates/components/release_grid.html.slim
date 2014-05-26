@@ -1,6 +1,6 @@
 .grid
   .grid-item draggable="headbang/release" draggable-data="release.id" ng-repeat="release in releases track by release.id"
-    .grid-item-image ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+    .grid-item-image ng-click="console.log('/releases/' + release.id)" ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
       .release-controls
         .wrapper-1
           .btn-group.btn-group-justified

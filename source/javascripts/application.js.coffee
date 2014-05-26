@@ -1,13 +1,14 @@
 #= require angular
 #= require angular-animate
 #= require angular-ui
+#= require angular-bootstrap
 #= require angular-route
 #= require angular-media-player
 #= require ngStorage
 #= require_self
 #= require_tree .
 
-@headbang = angular.module "headbang", ["mediaPlayer", "ngStorage", 'ngRoute', 'ngAnimate', 'ui']
+@headbang = angular.module "headbang", ["mediaPlayer", "ngStorage", 'ngRoute', 'ngAnimate', 'ui', 'ui.bootstrap']
 
 @headbang.run ($rootScope, $route, $location, $localStorage) ->
   $rootScope.$location = $location

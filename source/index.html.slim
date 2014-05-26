@@ -40,11 +40,8 @@ html ng-app="headbang"
               .list-group-item ng-if="!filter"
                 input.form-control-muted type="text" placeholder="New collection..." ng-model="newCollection.name" ui-keypress="{'enter': 'createCollection($event)'}"
 
-          h4
-            a href="#/artists"
-              small.pull-right
-                .fa.fa-cog
-              | Artists
+          a href="#/artists"
+            h4 Artists
 
           .list-group ng-if="artists.length"
             a.list-group-item href="#/artists/{{artist.id}}" ng-repeat="artist in artists track by artist.id" ng-class="{active: $route.current.name == 'artist' && $route.current.params.id == artist.id }"
@@ -67,6 +64,10 @@ html ng-app="headbang"
                 | {{label.releases_count}}
               | {{label.name}}
           i.text-muted ng-if="!labels.length" No results
+
+      .section-footer
+        .btn.btn-default ng-click="showSettings()"
+          i.fa.fa-cog
 
     .section.flex-1
       .section-body.section-body-primary ng-view="" scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
