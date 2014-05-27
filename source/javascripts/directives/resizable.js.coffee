@@ -3,22 +3,35 @@
     $element.addClass("resizable")
     $element.css(width: "#{$attrs.resizableMin}px")
 
+    $handle = angular.element("<div class='resizable-handle resizable-handle-#{$attrs.resizable}'></div>")
+    $element.append($handle)
+
     mousemove = (event) ->
-      if $attrs.resizable is "vertical"
-        x = event.pageX
-        x = parseInt($attrs.resizableMax) if $attrs.resizableMax and x > $attrs.resizableMax
-        $element.css(width: "#{x}px")
-      else
-        y = window.innerHeight - event.pageY
-        $element.css(height: "#{y}px")
+      switch $attrs.resizable
+        when "left", "right"
+          switch $attrs.resizable
+            when "left"
+              bounds = $element[0].getBoundingClientRect()
+              width = bounds.width + (bounds.left - event.clientX)
+            when "right"
+              width = event.clientX
+
+          if $attrs.resizableMin and width < $attrs.resizableMin
+            width = parseInt($attrs.resizableMin)
+
+          if $attrs.resizableMax and width > $attrs.resizableMax
+            width = parseInt($attrs.resizableMax)
+
+          $element.css(width: "#{width}px")
+
+        else
+          throw "Unknown resizable option: #{$attrs.resizable}"
 
     mouseup = ->
       $document.unbind "mousemove", mousemove
       $document.unbind "mouseup", mouseup
 
-    $element.on "mousedown", (event) ->
-      # TODO: figure a resizeable zone
-      if event.pageX >= $element.css("x") - 5
-        event.preventDefault()
-        $document.on "mousemove", mousemove
-        $document.on "mouseup", mouseup
+    $handle.on 'mousedown', (event) ->
+      event.preventDefault()
+      $document.on "mousemove", mousemove
+      $document.on "mouseup", mouseup

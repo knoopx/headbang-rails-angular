@@ -134,3 +134,25 @@ input[type='range']::-webkit-slider-thumb
   border-radius: 5px
   box-shadow: 0 0 5px rgba(black, .25)
   background-color: $color-red
+
+
+.resizable
+  position: relative
+
+.resizable-handle
+  position: absolute
+  z-index: 1000
+
+.resizable-handle-right
+  width: 2px
+  top: 0
+  right: 0
+  bottom: 0px
+  cursor: ew-resize
+
+.resizable-handle-left
+  width: 2px
+  top: 0
+  left: 0
+  bottom: 0px
+  cursor: ew-resize

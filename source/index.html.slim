@@ -10,7 +10,7 @@ html ng-app="headbang"
   body ng-controller="appCtrl"
     audio preload="none" media-player="player" data-playlist="$storage.playlist"
 
-    .section resizable="vertical" resizable-min="300" resizable-max="600"
+    .section resizable="right" resizable-min="300" resizable-max="600"
       .section-header
         .input-group
           input.flex-1.form-control type="search" ng-model="filter" debounce="500"
@@ -71,7 +71,7 @@ html ng-app="headbang"
     .section.flex-1
       .section-body.section-body-primary ng-view="" scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
 
-    .section ng-if="player.currentTrack || playlist.length" resizable="vertical" resizable-min="400" resizable-max="600"
+    .section ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="400" resizable-max="600"
       .section-body
         ul.playlist ng-controller="playlistCtrl"
           li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in $storage.playlist" ng-class="{ active: player.playing && player.currentTrack === $index + 1}"
