@@ -4,9 +4,9 @@
       .release-controls
         .wrapper-1
           .btn-group.btn-group-justified
-            a.btn.btn-link ng-click="play($event, release, true)"
-              i.fa.fa-play
             a.btn.btn-link ng-click="play($event, release)"
+              i.fa.fa-play
+            a.btn.btn-link ng-click="enqueue($event, release)"
               i.fa.fa-plus
 
     .grid-item-body.ellipsis

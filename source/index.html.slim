@@ -8,7 +8,7 @@ html ng-app="headbang"
     = stylesheet_link_tag "application"
 
   body ng-controller="appCtrl"
-    audio preload="none" media-player="player" data-playlist="$storage.playlist"
+    audio media-player="player" playlist="playlist"
 
     .section resizable="right" resizable-min="300" resizable-max="600"
       .section-header
@@ -74,10 +74,11 @@ html ng-app="headbang"
     .section ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="400" resizable-max="600"
       .section-body
         ul.playlist ng-controller="playlistCtrl"
-          li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in $storage.playlist" ng-class="{ active: player.currentTrack === $index + 1}"
-            span.playlist-item-title ng-bind="track.title"
+          li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in playlist" ng-class="{active: $index == player.currentTrack - 1}"
+            span.pull-right.text-muted ng-bind="track.length | time"
+            span ng-bind="track.title"
             '
-            span.playlist-item-artist ng-bind="track.artist_name"
+            span.text-muted ng-bind="track.artist_name"
 
       .section-footer ng-if="player.currentTrack" ng-controller="playerCtrl"
         .flex-cols
@@ -106,7 +107,7 @@ html ng-app="headbang"
 
       .section-footer.clearfix
         .btn-group.pull-right
-          button.btn.btn-default ng-click="$storage.playlist.length = 0"
+          button.btn.btn-default ng-click="playlist.length = 0"
             i.fa.fa-trash-o
 
         .btn-group

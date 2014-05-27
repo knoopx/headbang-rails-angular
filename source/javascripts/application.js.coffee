@@ -9,10 +9,9 @@
 
 @headbang = angular.module "headbang", ["mediaPlayer", "ngStorage", 'ngRoute', 'ngAnimate', 'ui']
 
-@headbang.run ($rootScope, $route, $location, $localStorage) ->
+@headbang.run ($rootScope, $route, $location) ->
   $rootScope.$location = $location
   $rootScope.$route = $route
-  $rootScope.$storage = $localStorage
   $rootScope.endpoint = "http://localhost:3000"
 
   $rootScope.$on "$routeChangeStart", (e, route) ->
