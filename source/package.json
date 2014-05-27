@@ -1,7 +1,6 @@
 {
   "name": "Headbang",
   "main": "index.html",
-  "nodejs": false,
   "window": {
     "title": "Headbang",
     "icon": "images/icon.png",
