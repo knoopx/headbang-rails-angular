@@ -74,7 +74,7 @@ html ng-app="headbang"
     .section ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="400" resizable-max="600"
       .section-body
         ul.playlist ng-controller="playlistCtrl"
-          li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in $storage.playlist" ng-class="{ active: player.playing && player.currentTrack === $index + 1}"
+          li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in $storage.playlist" ng-class="{ active: player.currentTrack === $index + 1}"
             span.playlist-item-title ng-bind="track.title"
             '
             span.playlist-item-artist ng-bind="track.artist_name"
