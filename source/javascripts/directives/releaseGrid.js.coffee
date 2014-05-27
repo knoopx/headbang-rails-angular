@@ -7,8 +7,13 @@
     player: "="
     playlist: "="
 
-  controller: ($scope, $http) ->
-    $scope.playRelease = (release, replace = false) ->
+  controller: ($scope, $http, $location) ->
+    $scope.show = (release) ->
+      $location.path("/releases/#{release.id}")
+
+    $scope.play = ($event, release, replace = false) ->
+      $event.preventDefault()
+      $event.stopPropagation()
       $http.get("/releases/#{release.id}/tracks").success (response) ->
         if replace
           $scope.playlist = response

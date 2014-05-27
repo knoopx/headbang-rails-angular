@@ -1,12 +1,12 @@
 .grid
   .grid-item draggable="headbang/release" draggable-data="release.id" ng-repeat="release in releases track by release.id"
-    .grid-item-image ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+    .grid-item-image ng-click="show(release)" ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
       .release-controls
         .wrapper-1
           .btn-group.btn-group-justified
-            a.btn.btn-link ng-click="playRelease(release, true)"
+            a.btn.btn-link ng-click="play($event, release, true)"
               i.fa.fa-play
-            a.btn.btn-link ng-click="playRelease(release)"
+            a.btn.btn-link ng-click="play($event, release)"
               i.fa.fa-plus
 
     .grid-item-body.ellipsis
