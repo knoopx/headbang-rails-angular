@@ -11,4 +11,4 @@
 
   $scope.enqueueRelease = (release) ->
     $http.get("/releases/#{release.id}/tracks").success (response) ->
-      $scope.playlist.concat(response)
+      $scope.playlist = $scope.playlist.concat(response)
