@@ -83,7 +83,7 @@ html ng-app="headbang"
       .section-footer ng-if="player.currentTrack" ng-controller="playerCtrl"
         .flex-cols
           .after-1
-            .artwork style="width:86px" ng-style="{'background-image': 'url(' + (track.release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+            .artwork style="width:86px" ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
 
           .flex-1
             .pull-right
@@ -93,10 +93,10 @@ html ng-app="headbang"
               strong ng-bind="track.title"
 
             .ellipsis
-              span ng-bind="track.release.title"
+              span ng-bind="release.title"
             '
             .pull-right
-              .text-muted ng-bind="track.release.year"
+              .text-muted ng-bind="release.year"
             .ellipsis
               span ng-bind="track.artist_name"
 
@@ -107,18 +107,18 @@ html ng-app="headbang"
 
       .section-footer.clearfix
         .btn-group.pull-right
-          button.btn.btn-default ng-click="playlist.length = 0"
+          a.btn.btn-default ng-click="playlist.length = 0"
             i.fa.fa-trash-o
 
         .btn-group
-          button.btn.btn-default ng-click="player.prev(true)"
+          a.btn.btn-default ng-click="player.prev()"
             i.fa.fa-backward
 
-          button.btn.btn-default ng-show="player.playing" ng-click="player.pause()"
+          a.btn.btn-default ng-show="player.playing" ng-click="player.pause()"
             i.fa.fa-pause
 
-          button.btn.btn-default ng-show="!player.playing" ng-click="player.play()"
+          a.btn.btn-default ng-show="!player.playing" ng-click="player.play()"
             i.fa.fa-play
 
-          button.btn.btn-default ng-click="player.next(true)"
+          a.btn.btn-default ng-click="player.next()"
             i.fa.fa-forward
