@@ -1,4 +1,4 @@
-@headbang.controller "appCtrl", ($scope, $http) ->
+@headbang.controller "appCtrl", ($scope, $http, $timeout) ->
   $scope.filter = null
   $scope.offset = 0
   $scope.limit = 120
@@ -7,7 +7,8 @@
   $scope.playRelease = (release) ->
     $http.get("/releases/#{release.id}/tracks").success (response) ->
       $scope.playlist = response
-      $scope.player.play(0)
+      $timeout ->
+        $scope.player.play(0)
 
   $scope.enqueueRelease = (release) ->
     $http.get("/releases/#{release.id}/tracks").success (response) ->
