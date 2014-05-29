@@ -8,6 +8,8 @@ task :dist => :web do
   FileUtils.cp_r("/usr/local/lib/node_modules/nodewebkit/nodewebkit", "dist/osx/Headbang.app")
   puts "Copying app.nw"
   FileUtils.cp_r("build", "dist/osx/Headbang.app/Contents/Resources/app.nw")
+  puts "Copying nw.icns"
+  FileUtils.cp("resources/icon.icns", "dist/osx/Headbang.app/Contents/Resources/nw.icns")
 
   if File.exist?("vendor/ffmpegsumo.so")
     puts "Copying ffmpegsumo.so"
