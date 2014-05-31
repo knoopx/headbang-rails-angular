@@ -10,7 +10,7 @@ html ng-app="headbang"
   body.flex-cols ng-controller="appCtrl"
     audio media-player="player" playlist="playlist"
 
-    .section.flex-rows resizable="right" resizable-min="300" resizable-max="600"
+    .section.flex-rows resizable="right" resizable-min="280" resizable-max="600"
       .section-header
         .input-group
           input.flex-1.form-control type="search" ng-model="filter" debounce="500"
@@ -34,7 +34,7 @@ html ng-app="headbang"
 
     .section.flex-1.flex-rows ng-view=""
 
-    .section.flex-rows ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="400" resizable-max="600"
+    .section.flex-rows ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="320" resizable-max="600"
       .section-body.flex-1 ng-include="'templates/playlist.html'"
       .section-footer ng-include="'templates/player.html'" ng-if="player.currentTrack" ng-controller="playerCtrl"
       .section-footer.clearfix

@@ -4,8 +4,8 @@
   "window": {
     "title": "Headbang",
     "icon": "images/icon.png",
-    "toolbar": true,
-    "width": 1720,
-    "height": 768
+    "toolbar": false,
+    "width": 1152,
+    "height": 720
   }
 }

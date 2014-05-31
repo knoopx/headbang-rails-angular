@@ -1,6 +1,6 @@
 @headbang.directive "releaseGrid", ->
   restrict: 'E'
-  templateUrl: "templates/components/release_grid.html"
+  templateUrl: "templates/release_grid.html"
   scope:
     releases: "="
     onPlay: "&play"

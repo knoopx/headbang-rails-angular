@@ -1,3 +1,6 @@
+$playlist-active-bg: $list-group-active-bg
+$playlist-active-color: $list-group-active-color
+
 .playlist
   padding-left: 0
   list-style: none
@@ -18,8 +21,10 @@
       border-bottom: 1px solid rgba(black, 0.1)
 
     &.active
-      background-color: $list-group-active-bg
-      color: $list-group-active-color
+      background-color: $playlist-active-bg
+      color: $playlist-active-color
+      font-weight: bold
 
       .text-muted
-        color: $list-group-active-color
+        font-weight: normal
+        color: $playlist-active-color

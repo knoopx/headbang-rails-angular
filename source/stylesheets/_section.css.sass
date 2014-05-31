@@ -1,24 +1,26 @@
+$section-header-bg: darken($body-bg, 5%)
+$section-footer-bg: $section-header-bg
+$section-border: darken($section-header-bg, 5%)
+
 .section
   &:not(:last-child)
-    border-right: 1px solid $navbar-default-border
+    border-right: 1px solid $section-border
 
   .section-title
-    margin: 0
-
-  .section-header
-    border-bottom: 1px solid $navbar-default-border
+    line-height: 34px
+    font-size: 22px
 
   .section-body
     overflow-y: auto
     overflow-x: hidden
-    background-color: $navbar-default-bg
-
-    &.section-body-primary
-      background-color: darken($navbar-default-bg, 2%)
-
-  .section-footer
-    border-top: 1px solid $navbar-default-border
 
   .section-header, .section-footer
     padding: 12px
-    background-color: $navbar-default-bg
+
+  .section-header
+    background-color: $section-header-bg
+    border-bottom: 1px solid $section-border
+
+  .section-footer
+    background-color: $section-footer-bg
+    border-top: 1px solid $section-border
