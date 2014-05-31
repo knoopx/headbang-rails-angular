@@ -7,7 +7,7 @@
       controller: "browseCtrl"
       size: "md"
       resolve:
-        path: "/"
+        path: -> "/"
 
     modal.result.then (path) ->
       $http.post("/sources", source: {path: path}).success($scope.refreshSources)
