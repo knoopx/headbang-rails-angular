@@ -4,6 +4,18 @@
   $scope.limit = 120
   $scope.playlist = []
 
+  Mousetrap.bind "space", (e) ->
+    e.preventDefault()
+    $scope.player.playPause()
+
+  Mousetrap.bind "command+left", (e) ->
+    e.preventDefault()
+    $scope.player.prev()
+
+  Mousetrap.bind "command+right", (e) ->
+    e.preventDefault()
+    $scope.player.next()
+
   $scope.play = (tracks) ->
     $scope.playlist = tracks
     $timeout ->

@@ -89,6 +89,7 @@ GEM
     rails-assets-angular-ui (0.4.0)
     rails-assets-angular-ui-router (0.2.10)
       rails-assets-angular (>= 1.0.8)
+    rails-assets-mousetrap (1.4.6)
     rails-assets-ngstorage (0.3.0)
       rails-assets-angular (>= 1.0.8)
     rb-fsevent (0.9.4)
@@ -135,6 +136,7 @@ DEPENDENCIES
   rails-assets-angular-route
   rails-assets-angular-ui
   rails-assets-angular-ui-router
+  rails-assets-mousetrap
   rails-assets-ngstorage
   sass
   slim

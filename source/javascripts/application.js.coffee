@@ -5,6 +5,7 @@
 #= require angular-route
 #= require angular-media-player
 #= require ngStorage
+#= require mousetrap
 #= require_self
 #= require_tree .
 
