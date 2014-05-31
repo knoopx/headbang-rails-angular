@@ -1,0 +1,23 @@
+.flex-cols
+  .after-1
+    .artwork style="width:86px" ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
+
+  .flex-1
+    .pull-right
+      .label.label-default
+        | {{track.bitrate}} kbps
+    .ellipsis
+      strong ng-bind="track.title"
+
+    .ellipsis
+      span ng-bind="release.title"
+    '
+    .pull-right
+      .text-muted ng-bind="release.year"
+    .ellipsis
+      span ng-bind="track.artist_name"
+
+    .clearfix
+      input type="range" min="0" max="{{player.duration}}" ng-model="player.currentTime" onchange="angular.element(this).scope().seek(this.value)"
+      small.pull-right ng-bind="player.formatDuration"
+      small.pull-left ng-bind="player.formatTime"

@@ -35,39 +35,8 @@ html ng-app="headbang"
     .section.flex-1.flex-rows ng-view="" scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
 
     .section.flex-rows ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="400" resizable-max="600"
-      .section-body.flex-1
-        ul.playlist ng-controller="playlistCtrl"
-          li.playlist-item ng-dblclick="player.play($index)" ng-repeat="track in playlist" ng-class="{active: $index == player.currentTrack - 1}"
-            span.pull-right.text-muted ng-bind="track.length | time"
-            span ng-bind="track.title"
-            '
-            span.text-muted ng-bind="track.artist_name"
-
-      .section-footer ng-if="player.currentTrack" ng-controller="playerCtrl"
-        .flex-cols
-          .after-1
-            .artwork style="width:86px" ng-style="{'background-image': 'url(' + (release.artwork_url || '#{image_url("cd.svg")}') + ')'}"
-
-          .flex-1
-            .pull-right
-              .label.label-default
-                | {{track.bitrate}} kbps
-            .ellipsis
-              strong ng-bind="track.title"
-
-            .ellipsis
-              span ng-bind="release.title"
-            '
-            .pull-right
-              .text-muted ng-bind="release.year"
-            .ellipsis
-              span ng-bind="track.artist_name"
-
-            .clearfix
-              input type="range" min="0" max="{{player.duration}}" ng-model="player.currentTime" onchange="angular.element(this).scope().seek(this.value)"
-              small.pull-right ng-bind="player.formatDuration"
-              small.pull-left ng-bind="player.formatTime"
-
+      .section-body.flex-1 ng-include="'templates/playlist.html'"
+      .section-footer ng-include="'templates/player.html'" ng-if="player.currentTrack" ng-controller="playerCtrl"
       .section-footer.clearfix
         .btn-group.pull-right
           a.btn.btn-default ng-click="playlist.length = 0"
