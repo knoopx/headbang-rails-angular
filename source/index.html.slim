@@ -68,6 +68,14 @@ html ng-app="headbang"
               | {{label.name}}
           i.text-muted ng-if="!labels.length" No results
 
+      .section-footer
+        .btn-group.pull-right
+          a.btn.btn-default href="#/sources/refresh"
+            i.fa.fa-refresh
+
+          a.btn.btn-default href="#/settings"
+            i.fa.fa-cog
+
     .section.flex-1.flex-rows ng-view="" scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
 
     .section.flex-rows ng-if="player.currentTrack || playlist.length" resizable="left" resizable-min="400" resizable-max="600"

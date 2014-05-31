@@ -10,6 +10,7 @@ gem 'font-awesome-sass', require: false
 
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-bootstrap'
 gem 'rails-assets-angular-route'
 gem 'rails-assets-angular-ui'
 gem 'rails-assets-angular-ui-router'

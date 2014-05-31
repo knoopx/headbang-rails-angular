@@ -1,13 +1,14 @@
 #= require angular
 #= require angular-animate
 #= require angular-ui
+#= require angular-bootstrap
 #= require angular-route
 #= require angular-media-player
 #= require ngStorage
 #= require_self
 #= require_tree .
 
-@headbang = angular.module "headbang", ["mediaPlayer", "ngStorage", 'ngRoute', 'ngAnimate', 'ui']
+@headbang = angular.module "headbang", ["mediaPlayer", "ngStorage", 'ngRoute', 'ngAnimate', 'ui', 'ui.bootstrap']
 
 @headbang.run ($rootScope, $route, $location) ->
   $rootScope.$location = $location
@@ -37,6 +38,9 @@
   ).when('/labels/:id',
     templateUrl: 'templates/labels/show.html'
     controller: 'labelCtrl'
+  ).when('/settings',
+    templateUrl: 'templates/settings.html'
+    controller: 'settingsCtrl'
   ).otherwise(
     templateUrl: 'templates/releases/index.html'
     controller: 'libraryCtrl'
