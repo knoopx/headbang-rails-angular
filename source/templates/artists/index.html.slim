@@ -1,6 +1,6 @@
-.section-body.section-body-primary.flex-1.wrapper-1
+.section-body.section-body-primary.flex-1.wrapper-1 scroll-end="scrollEnd()" scroll-end-if="scrollEndActive" scroll-end-distance="2048"
   .grid
     .grid-item ng-repeat="artist in artists track by artist.id"
-       .grid-item-image ng-style="{'background-image': 'url(' + (artist.artwork_url || '#{image_url("drumkit.svg")}') + ')'}"
-       .grid-item-body.ellipsis
-         a href="#/artists/{{artist.id}}" ng-bind="artist.name"
+      .grid-item-image ng-style="{'background-image': 'url(' + (artist.artwork_url || '#{image_url("drumkit.svg")}') + ')'}"
+      .grid-item-body.ellipsis
+        a href="#/artists/{{artist.id}}" ng-bind="artist.name"

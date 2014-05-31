@@ -7,7 +7,7 @@
   $scope.$watch "filter", ->
     $scope.offset = 0
     $scope.scrollEndActive = true
-    $scope.fetch()
+    $scope.refresh()
 
   $scope.scrollEnd = () ->
     $scope.scrollEndActive = false
