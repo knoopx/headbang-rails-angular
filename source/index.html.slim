@@ -21,52 +21,8 @@ html ng-app="headbang"
             .btn.btn-default ng-click="filter = ''" ng-show="filter.length"
               i.fa.fa-times
 
-      .section-body.flex-1 ng-controller="mainNavigationCtrl"
-        .wrapper-1
-          .collections ng-controller="collectionsNavigationItemCtrl"
-            h4 Collections
-            .list-group
-              a.list-group-item href="#/" ng-class="{active: $route.current.name == 'library'}"
-                .pull-right
-                  i.fa.fa-home
-                | Library
-
-              a.list-group-item href="#/collections/{{collection.id}}" ng-repeat="collection in collections track by collection.id" ng-controller="collectionItemCtrl" droppable="headbang/release" droppable-drop="drop($data)" ng-class="{active: $route.current.name == 'collection' && $route.current.params.id == collection.id }"
-                .pull-right
-                  .btn.btn-xs ng-click="removeCollection(collection)"
-                    i.fa.fa-times
-                | {{collection.name}}
-
-              .list-group-item ng-if="!filter"
-                input.form-control-muted type="text" placeholder="New collection..." ng-model="newCollection.name" ui-keypress="{'enter': 'createCollection($event)'}"
-
-          h4
-            a href="#/artists"
-              small.pull-right
-                .fa.fa-cog
-              | Artists
-
-          .list-group ng-if="artists.length"
-            a.list-group-item href="#/artists/{{artist.id}}" ng-repeat="artist in artists track by artist.id" ng-class="{active: $route.current.name == 'artist' && $route.current.params.id == artist.id }"
-              span.badge
-                | {{artist.releases_count}}
-              | {{artist.name}}
-
-          i.text-muted ng-if="!artists.length" No results
-
-          h4 Genres
-          .list-group ng-if="genres.length"
-            a.list-group-item ng-repeat="genre in genres track by genre.id" ng-bind="genre.name"
-
-          i.text-muted ng-if="!genres.length" No results
-
-          h4 Labels
-          .list-group ng-if="labels.length"
-            a.list-group-item ng-repeat="label in labels" href="#/labels/{{label.id}}"
-              span.badge
-                | {{label.releases_count}}
-              | {{label.name}}
-          i.text-muted ng-if="!labels.length" No results
+      .section-body.flex-1
+        .wrapper-1 ng-controller="mainNavigationCtrl" ng-include="'templates/navigation.html'"
 
       .section-footer
         .btn-group.pull-right

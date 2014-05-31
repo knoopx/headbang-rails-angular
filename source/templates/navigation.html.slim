@@ -1,0 +1,42 @@
+.collections ng-controller="collectionsNavigationItemCtrl"
+  h4 Collections
+  .list-group
+    a.list-group-item href="#/" ng-class="{active: $route.current.name == 'library'}"
+      .pull-right.btn.btn-xs
+        i.fa.fa-home
+      | Library
+
+    a.list-group-item href="#/collections/{{collection.id}}" ng-repeat="collection in collections track by collection.id" ng-controller="collectionItemCtrl" droppable="headbang/release" droppable-drop="drop($data)" ng-class="{active: $route.current.name == 'collection' && $route.current.params.id == collection.id }"
+      .pull-right
+        .btn.btn-xs ng-click="removeCollection(collection)"
+          i.fa.fa-times
+      | {{collection.name}}
+
+    .list-group-item
+      input.form-control-muted type="text" placeholder="New collection..." ng-model="newCollection.name" ui-keypress="{'enter': 'createCollection($event)'}"
+
+.artists ng-if="artists.length"
+  h4
+    a href="#/artists"
+      small.pull-right
+        .fa.fa-cog
+      | Artists
+
+  .list-group
+    a.list-group-item href="#/artists/{{artist.id}}" ng-repeat="artist in artists track by artist.id" ng-class="{active: $route.current.name == 'artist' && $route.current.params.id == artist.id }"
+      span.badge
+        | {{artist.releases_count}}
+      | {{artist.name}}
+
+.genres ng-if="genres.length"
+  h4 Genres
+  .list-group
+    a.list-group-item ng-repeat="genre in genres track by genre.id" ng-bind="genre.name"
+
+.labels ng-if="labels.length"
+  h4 Labels
+  .list-group
+    a.list-group-item ng-repeat="label in labels" href="#/labels/{{label.id}}"
+      span.badge
+        | {{label.releases_count}}
+      | {{label.name}}
