@@ -26,6 +26,26 @@
         | {{artist.releases_count}}
       | {{artist.name}}
 
+.artists ng-if="releases.length"
+  h4
+    a href="#/releases"
+      | Releases
+
+  .list-group
+    a.list-group-item href="#/releases/{{release.id}}" ng-repeat="release in releases track by release.id" ng-class="{active: $route.current.name == 'release' && $route.current.params.id == release.id }"
+      span.badge
+        | {{release.play_count}}
+
+      .list-group-item-text
+        .media
+          .pull-left
+            img.media-object height="32" ng-src="{{release.artwork_url}}" ng-if="release.artwork_url"
+            img.media-object height="32" src=image_url("cd.svg") ng-if="!release.artwork_url"
+          .media-body
+            | {{release.title}}
+            .text-muted
+              | {{release.artist.name}}
+
 .genres ng-if="genres.length"
   h4 Genres
   .list-group
