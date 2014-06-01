@@ -1,4 +1,4 @@
-@headbang.controller "appCtrl", ($scope, $http, $timeout) ->
+@headbang.controller "appCtrl", ($scope, $http, $timeout, $localStorage, connectionDialog) ->
   $scope.filter = null
   $scope.offset = 0
   $scope.limit = 120
@@ -41,3 +41,8 @@
 
   $scope.enqueueCollection = (collection) ->
     $http.get("/collections/#{collection.id}/tracks").success($scope.enqueue)
+
+  $scope.connection = ->
+    connectionDialog.open($localStorage.endpoint).then (endpoint) ->
+      $localStorage.endpoint = endpoint
+

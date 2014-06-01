@@ -25,6 +25,9 @@ html ng-app="headbang"
         .wrapper-1 ng-controller="mainNavigationCtrl" ng-include="'templates/navigation.html'"
 
       .section-footer
+        .btn-group
+          a.btn.btn-default ng-click="connection()"
+            i.fa.fa-globe
         .btn-group.pull-right
           a.btn.btn-default href="#/sources/refresh"
             i.fa.fa-refresh

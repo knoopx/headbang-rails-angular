@@ -14,7 +14,6 @@
 @headbang.run ($rootScope, $route, $location) ->
   $rootScope.$location = $location
   $rootScope.$route = $route
-  $rootScope.endpoint = "http://localhost:3000"
 
   $rootScope.$on "$routeChangeStart", (e, route) ->
     $rootScope.$route.current.name = route.name if $rootScope.$route.current
