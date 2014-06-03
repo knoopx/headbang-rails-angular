@@ -3,13 +3,14 @@
     $scope.newCollection = {}
 
   $scope.createCollection = ->
-    $http.post("/collections", $scope.newCollection).success (response) ->
+    console.log $scope.newCollection
+    $http.post("/collections", collection: $scope.newCollection).success ->
       $scope.resetNewCollection()
       $scope.refreshCollections()
 
   $scope.removeCollection = (collection) ->
     if $window.confirm("Are you sure?")
-      $http.delete("/collections/#{collection.id}").success (response) ->
+      $http.delete("/collections/#{collection.id}").success ->
         $scope.refreshCollections()
 
   $scope.refreshCollections = ->
