@@ -46,3 +46,6 @@
     connectionDialog.open($localStorage.endpoint).then (endpoint) ->
       $localStorage.endpoint = endpoint
 
+  $scope.scanSources = ->
+    $http.post("/sources/scan")
+
