@@ -6,7 +6,7 @@
         i.fa.fa-home
       | Library
 
-    a.list-group-item href="#/collections/{{collection.id}}" ng-repeat="collection in collections track by collection.id" ng-controller="collectionItemCtrl" droppable="headbang/release" droppable-drop="drop($data)" ng-class="{active: $route.current.name == 'collection' && $route.current.params.id == collection.id }"
+    a.list-group-item href="#/collections/{{collection.id}}" ng-repeat="collection in collections track by collection._id" ng-controller="collectionItemCtrl" droppable="headbang/release" droppable-drop="drop($data)" ng-class="{active: $route.current.name == 'collection' && $route.current.params.id == collection.id }"
       .pull-right
         .btn.btn-xs ng-click="removeCollection(collection)"
           i.fa.fa-times

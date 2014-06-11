@@ -1,21 +1,20 @@
-@headbang.controller "collectionsNavigationItemCtrl", ($scope, $http, $window) ->
+@headbang.controller "collectionsNavigationItemCtrl", ($scope, $http, $window, db, $q) ->
   $scope.resetNewCollection = ->
     $scope.newCollection = {}
 
   $scope.createCollection = ->
-    console.log $scope.newCollection
-    $http.post("/collections", collection: $scope.newCollection).success ->
+    db.collections.insert $scope.newCollection, ->
       $scope.resetNewCollection()
       $scope.refreshCollections()
 
   $scope.removeCollection = (collection) ->
     if $window.confirm("Are you sure?")
-      $http.delete("/collections/#{collection.id}").success ->
+      db.collections.remove _id: collection._id, {}, ->
         $scope.refreshCollections()
 
   $scope.refreshCollections = ->
-    $http.get("/collections").success (response) ->
-      $scope.collections = response
+    db.collections.find().then (e, result) ->
+      $scope.collections = result
 
   $scope.resetNewCollection()
   $scope.refreshCollections()

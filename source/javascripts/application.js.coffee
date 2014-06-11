@@ -11,10 +11,11 @@
 
 @headbang = angular.module "headbang", ["mediaPlayer", "ngStorage", 'ngRoute', 'ngAnimate', 'ui', 'ui.bootstrap']
 
-@headbang.run ($rootScope, $route, $location) ->
+@headbang.run ($rootScope, $route, $location, db) ->
+  window.db = db
+
   $rootScope.$location = $location
   $rootScope.$route = $route
-
   $rootScope.$on "$routeChangeStart", (e, route) ->
     $rootScope.$route.current.name = route.name if $rootScope.$route.current
 

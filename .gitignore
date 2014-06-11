@@ -11,7 +11,7 @@
 /build
 /dist
 /vendor
-
+/source/node_modules
 # Ignore cache
 /.sass-cache
 /.cache

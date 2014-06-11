@@ -4,8 +4,12 @@
   "window": {
     "title": "Headbang",
     "icon": "images/icon.png",
-    "toolbar": false,
+    "toolbar": true,
     "width": 1152,
     "height": 720
+  },
+  "dependencies": {
+    "id3": "0.0.3",
+    "nedb": "^0.10.5"
   }
 }
